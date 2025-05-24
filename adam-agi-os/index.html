@@ -51,7 +51,7 @@
       </div>
       <div class="icon" data-app="adamAGI">
         <img
-          src="https://storage.googleapis.com/gemini-95-icons/GeminiChatRetro.png"
+          src="https://storage.googleapis.com/gemini-95-icons/AdamChatRetro.png"
           alt="Adam AGI App"
         />
         <span>Adam AGI App</span>
@@ -71,6 +71,50 @@
           style="width: 48px; height: 48px"
         />
         <span>Adam Player</span>
+      </div>
+      <div class="icon" data-app="customGpts">
+        <img
+          src="https://win98icons.alexmeub.com/icons/png/settings_gear-0.png"
+          alt="Custom GPTs"
+          style="width: 48px; height: 48px"
+        />
+        <span>Custom GPTs</span>
+      </div>
+      <div class="icon" data-app="gardenOfEden">
+        <img
+          src="https://win98icons.alexmeub.com/icons/png/tree_palm-1.png"
+          alt="Garden Of Eden"
+          style="width: 48px; height: 48px"
+        />
+        <span>Garden Of Eden</span>
+      </div>
+      <div class="icon" data-app="personalization">
+        <img src="https://win98icons.alexmeub.com/icons/png/display_properties-0.png" alt="Personalization" style="width: 48px; height: 48px;" />
+        <span>Personalization</span>
+      </div>
+      <div class="icon" data-app="newsApp">
+        <img src="https://win98icons.alexmeub.com/icons/png/news_newspaper_notebook-0.png" alt="News" style="width: 48px; height: 48px;" />
+        <span>News</span>
+      </div>
+      <div class="icon" data-app="mailApp">
+        <img src="https://win98icons.alexmeub.com/icons/png/message_envelope_email_mail-0.png" alt="Mail" style="width: 48px; height: 48px;" />
+        <span>Mail</span>
+      </div>
+      <div class="icon" data-app="calculatorApp">
+        <img src="https://win98icons.alexmeub.com/icons/png/calculator-0.png" alt="Calculator" style="width: 48px; height: 48px;" />
+        <span>Calculator</span>
+      </div>
+      <div class="icon" data-app="calendarApp">
+        <img src="https://win98icons.alexmeub.com/icons/png/calendar_schedule_task-0.png" alt="Calendar" style="width: 48px; height: 48px;" />
+        <span>Calendar</span>
+      </div>
+      <div class="icon" data-app="fileExplorerApp">
+        <img src="https://win98icons.alexmeub.com/icons/png/directory_explorer-0.png" alt="File Explorer" style="width: 48px; height: 48px;" />
+        <span>File Explorer</span>
+      </div>
+      <div class="icon" data-app="settingsApp">
+        <img src="https://win98icons.alexmeub.com/icons/png/settings_gear-0.png" alt="Settings" style="width: 48px; height: 48px;" />
+        <span>Settings</span>
       </div>
 
 
@@ -351,6 +395,263 @@
         </div>
       </div>
 
+      <div class="window resizable" id="customGpts" style="width: 400px; height: 300px;">
+        <div class="window-titlebar">
+          <span class="window-title">Custom GPTs</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content">
+          <p>Custom GPTs functionality will be available here.</p>
+        </div>
+      </div>
+
+      <div class="window resizable" id="gardenOfEden" style="width: 400px; height: 300px;">
+        <div class="window-titlebar">
+          <span class="window-title">Garden Of Eden</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content">
+          <p>Welcome to the Garden Of Eden. Content to be determined.</p>
+        </div>
+      </div>
+
+      <div class="window resizable" id="personalization" style="width: 450px; height: 350px;">
+        <div class="window-titlebar">
+          <span class="window-title">Personalization</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content" style="display: flex; flex-direction: column; padding: 10px;">
+          <h3>Change Desktop Background</h3>
+          <p>Select a 4K image for your desktop:</p>
+          <input type="file" id="background-input" accept="image/*" style="margin-top: 10px;" />
+          <button id="reset-background-button" style="margin-top: 20px; padding: 8px; width: 150px;">Reset to Default</button>
+          <p style="margin-top:15px; font-size:0.8em; color:#555;">
+            Note: Chosen background is saved locally in your browser.
+          </p>
+        </div>
+      </div>
+
+      <div class="window resizable" id="newsApp" style="width: 700px; height: 500px;">
+        <div class="window-titlebar">
+          <span class="window-title">News Feed</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content" style="padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <h3>Today's Headlines</h3>
+          <p>News functionality is currently under development.</p>
+          <p>Alternatively, for a quick news overview, you could embed a simple news RSS feed or a public news website if allowed by their terms of service.</p>
+          <!-- Example of an iframe placeholder, if we decide to go this route later:
+          <iframe src="https://www.bbc.com/news/world/rss.xml" style="width:100%; height: calc(100% - 50px); border: 1px solid #ccc; margin-top:10px;"></iframe>
+          <p style="font-size:0.8em; margin-top:5px;">Note: iframe content is from an external source.</p>
+          -->
+        </div>
+      </div>
+
+      <div class="window resizable" id="mailApp" style="width: 750px; height: 550px;">
+        <div class="window-titlebar">
+          <span class="window-title">Adam Mail</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content" style="padding: 0; display: flex; flex-direction: column;">
+          <!-- Basic 3-pane layout placeholder -->
+          <div style="display: flex; flex-grow: 1; border-top: 1px solid #ccc;">
+            <div style="width: 200px; border-right: 1px solid #ccc; padding: 10px; background-color: #f5f5f5;">
+              <strong>Folders</strong>
+              <ul style="list-style-type: none; padding-left: 5px; margin-top:5px;">
+                <li>Inbox</li>
+                <li>Sent</li>
+                <li>Drafts</li>
+                <li>Trash</li>
+              </ul>
+            </div>
+            <div style="width: 300px; border-right: 1px solid #ccc; padding: 10px; background-color: #fdfdfd;">
+              <strong>Email List</strong>
+              <p style="margin-top:10px; font-size:0.9em;">Email previews would appear here.</p>
+              <p style="margin-top:10px; font-size:0.9em;">(Mail client functionality is under development)</p>
+            </div>
+            <div style="flex-grow: 1; padding: 10px;">
+              <strong>Email Content</strong>
+              <p style="margin-top:10px; font-size:0.9em;">Selected email content would display here.</p>
+            </div>
+          </div>
+          <div style="padding: 10px; border-top: 1px solid #ccc; background-color: #efefef; text-align:center; font-size:0.9em;">
+            Adam Mail - Full functionality coming soon!
+          </div>
+        </div>
+      </div>
+
+      <div class="window resizable" id="calculatorApp" style="width: 320px; height: 420px;">
+        <div class="window-titlebar">
+          <span class="window-title">Calculator</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content calculator-content" style="padding: 0; background-color: #f3f3f3;">
+          <div class="calculator-display" style="background-color: #f3f3f3; color: #000; text-align: right; padding: 20px 15px; font-size: 2em; border-bottom: 1px solid #ccc;">
+            <span>0</span>
+          </div>
+          <div class="calculator-buttons" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background-color: #d9d9d9;">
+            <!-- Operators -->
+            <button style="grid-column: span 1;" data-action="clear-entry">CE</button>
+            <button style="grid-column: span 1;" data-action="clear-all">C</button>
+            <button style="grid-column: span 1;" data-action="backspace">⌫</button>
+            <button style="grid-column: span 1;" data-value="/" class="operator">÷</button>
+
+            <button data-value="7">7</button>
+            <button data-value="8">8</button>
+            <button data-value="9">9</button>
+            <button data-value="*" class="operator">×</button>
+
+            <button data-value="4">4</button>
+            <button data-value="5">5</button>
+            <button data-value="6">6</button>
+            <button data-value="-" class="operator">−</button>
+
+            <button data-value="1">1</button>
+            <button data-value="2">2</button>
+            <button data-value="3">3</button>
+            <button data-value="+" class="operator">+</button>
+
+            <button data-value="+/-" title="Negate">±</button>
+            <button data-value="0">0</button>
+            <button data-value=".">.</button>
+            <button data-action="calculate" class="operator equals">=</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="window resizable" id="calendarApp" style="width: 380px; height: 420px;">
+        <div class="window-titlebar">
+          <span class="window-title">Calendar</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content calendar-content" style="padding: 10px; background-color: #fff; display: flex; flex-direction: column;">
+          <div class="calendar-header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+            <button id="prev-month-button" class="calendar-nav-button">&lt;</button>
+            <h3 id="month-year-header" style="font-size: 1.2em; margin:0;">Month Year</h3>
+            <button id="next-month-button" class="calendar-nav-button">&gt;</button>
+          </div>
+          <div class="calendar-days-header" style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; padding: 8px 0; font-size: 0.8em; color: #555; background-color: #f9f9f9;">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="calendar-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; flex-grow: 1; background-color: #f0f0f0; padding:2px;">
+            <!-- Day cells will be generated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <div class="window resizable" id="fileExplorerApp" style="width: 700px; height: 500px;">
+        <div class="window-titlebar">
+          <span class="window-title">File Explorer</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content file-explorer-content" style="display: flex; flex-direction: column; padding: 0;">
+          <!-- Toolbar Placeholder -->
+          <div class="file-explorer-toolbar" style="padding: 8px; background-color: #f3f3f3; border-bottom: 1px solid #e0e0e0; display:flex; align-items:center; gap: 8px;">
+            <button class="file-explorer-nav-button" title="Up">↑</button>
+            <input type="text" class="file-explorer-address-bar" value="C:\" readonly style="flex-grow:1; padding: 5px; border: 1px solid #ccc; border-radius: 3px; background-color: #fff;" />
+          </div>
+          <!-- Main Content Area (Sidebar + Files) -->
+          <div style="display: flex; flex-grow: 1;">
+            <div class="file-explorer-sidebar" style="width: 200px; background-color: #f9f9f9; border-right: 1px solid #e0e0e0; padding: 10px;">
+              <strong style="display:block; margin-bottom:5px;">Quick Access</strong>
+              <ul style="list-style-type: none; padding-left: 5px;">
+                <li>Desktop</li>
+                <li>Downloads</li>
+                <li>Documents</li>
+              </ul>
+              <strong style="display:block; margin-top:15px; margin-bottom:5px;">This PC</strong>
+              <ul style="list-style-type: none; padding-left: 5px;">
+                <li>C: Drive</li>
+              </ul>
+            </div>
+            <div class="file-explorer-main" style="flex-grow: 1; padding: 10px; background-color: #fff;">
+              <!-- File/Folder Icons will go here -->
+              <div class="fe-item" data-type="folder"><img src="https://win98icons.alexmeub.com/icons/png/directory_closed-0.png" alt="Folder"/><span>Documents</span></div>
+              <div class="fe-item" data-type="folder"><img src="https://win98icons.alexmeub.com/icons/png/directory_closed-0.png" alt="Folder"/><span>Downloads</span></div>
+              <div class="fe-item" data-type="folder"><img src="https://win98icons.alexmeub.com/icons/png/directory_closed-0.png" alt="Folder"/><span>Pictures</span></div>
+              <div class="fe-item" data-type="file"><img src="https://win98icons.alexmeub.com/icons/png/file_lines-0.png" alt="File"/><span>report.txt</span></div>
+              <div class="fe-item" data-type="file"><img src="https://win98icons.alexmeub.com/icons/png/paint_file-0.png" alt="File"/><span>image.png</span></div>
+               <div class="fe-item" data-type="secret-file" id="secret-image-icon-explorer"><img src="https://win98icons.alexmeub.com/icons/png/paint_file-0.png" alt="Secret File"/><span>dontshowthis...</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="window resizable" id="settingsApp" style="width: 750px; height: 550px;">
+        <div class="window-titlebar">
+          <span class="window-title">Settings</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content settings-app-content" style="display: flex; padding: 0; background-color: #f9f9f9;">
+          <div class="settings-sidebar" style="width: 220px; background-color: #e3e3e3; padding: 15px 0px;">
+            <ul class="settings-categories" style="list-style-type: none; padding: 0; margin: 0;">
+              <li data-category="system" class="active-setting">System</li>
+              <li data-category="personalization">Personalization</li>
+              <li data-category="network">Network</li>
+              <li data-category="apps">Apps</li>
+              <li data-category="accounts">Accounts</li>
+            </ul>
+          </div>
+          <div class="settings-main-content" style="flex-grow: 1; padding: 20px; background-color: #fff;">
+            <!-- Content for each category will be shown here -->
+            <div class="settings-category-content" id="settings-system">
+              <h2>System</h2>
+              <p>Display, sound, notifications, power.</p>
+              <p><em>(Full system information and options would appear here.)</em></p>
+              <button id="test-notification-button" style="margin-top: 15px;">Show Test Notification</button>
+            </div>
+            <div class="settings-category-content" id="settings-personalization" style="display:none;">
+              <h2>Personalization</h2>
+              <p>Background, colors, themes.</p>
+              <p><em>(Personalization settings, possibly linking to or embedding the existing Personalization app's features, would appear here.)</em></p>
+              <button id="open-personalization-app-button">Change Desktop Background</button>
+            </div>
+            <div class="settings-category-content" id="settings-network" style="display:none;">
+              <h2>Network</h2>
+              <p>Wi-Fi, Ethernet, VPN.</p>
+              <p><em>(Network configuration and status would appear here.)</em></p>
+            </div>
+            <div class="settings-category-content" id="settings-apps" style="display:none;">
+              <h2>Apps</h2>
+              <p>Installed apps, default apps, startup.</p>
+              <p><em>(App management features would appear here.)</em></p>
+            </div>
+            <div class="settings-category-content" id="settings-accounts" style="display:none;">
+              <h2>Accounts</h2>
+              <p>Your accounts, sign-in options, family.</p>
+              <p><em>(User account management would appear here.)</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Start Menu -->
       <div class="start-menu" id="start-menu">
@@ -362,18 +663,37 @@
         <div class="start-menu-item" data-app="adamAGI">Adam AGI App</div>
         <div class="start-menu-item" data-app="minesweeper">Adam Sweeper</div>
         <div class="start-menu-item" data-app="mediaPlayer">Adam Player</div>
+        <div class="start-menu-item" data-app="customGpts">Custom GPTs</div>
+        <div class="start-menu-item" data-app="gardenOfEden">Garden Of Eden</div>
+        <div class="start-menu-item" data-app="personalization">Personalization</div>
+        <div class="start-menu-item" data-app="newsApp">News</div>
+        <div class="start-menu-item" data-app="mailApp">Mail</div>
+        <div class="start-menu-item" data-app="calculatorApp">Calculator</div>
+        <div class="start-menu-item" data-app="calendarApp">Calendar</div>
+        <div class="start-menu-item" data-app="fileExplorerApp">File Explorer</div>
+        <div class="start-menu-item" data-app="settingsApp">Settings</div>
       </div>
 
       <!-- Taskbar -->
       <div id="taskbar">
         <button id="start-button">
           <img
-            src="https://storage.googleapis.com/gemini-95-icons/start-gemini.png"
+            src="https://storage.googleapis.com/gemini-95-icons/start-adam.png"
             alt="Start Adam AGI"
-            style="width: 80px; height: 70px"
+            style="width: 24px; height: 24px"
           />
         </button>
+        <input type="text" id="taskbar-search" placeholder="Search..." />
+        <button id="taskbar-task-view" class="taskbar-sys-button" title="Task View">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 14.5 0h-13zM1 1.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-13zM5 3h6a1 1 0 0 1 1 1v2.5h1.5a.5.5 0 0 1 0 1H12V12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7.5H2.5a.5.5 0 0 1 0-1H4V4a1 1 0 0 1 1-1z"/>
+          </svg>
+        </button>
         <div id="taskbar-apps">
+        </div>
+        <div id="taskbar-datetime" class="taskbar-datetime">
+          <span id="time">12:00 PM</span>
+          <span id="date">1/1/2024</span>
         </div>
       </div>
 
@@ -384,6 +704,29 @@
           alt="Adam AGI Paint Assistant"
           class="assistant-image"
         />
+      </div>
+    </div>
+    <div id="notification-area">
+      <!-- Notifications will be appended here by JavaScript -->
+    </div>
+    <div id="virtual-desktop-overlay" style="display: none;">
+      <div class="virtual-desktop-header">
+          <h3>Virtual Desktops</h3>
+          <button id="close-virtual-desktop-overlay">✕</button>
+      </div>
+      <div class="virtual-desktop-thumbnails">
+        <div class="virtual-desktop-thumbnail active-vd">
+          <div class="thumbnail-preview">[Desktop 1 Preview]</div>
+          <span>Desktop 1</span>
+        </div>
+        <div class="virtual-desktop-thumbnail">
+          <div class="thumbnail-preview">[Desktop 2 Preview]</div>
+          <span>Desktop 2</span>
+        </div>
+        <div class="virtual-desktop-thumbnail add-new-vd">
+          <div class="thumbnail-preview-add">+</div>
+          <span>New desktop</span>
+        </div>
       </div>
     </div>
   </body>

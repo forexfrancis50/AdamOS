@@ -6,7 +6,7 @@ import '@tailwindcss/browser';
 import { GoogleGenAI, GenerateContentResponse, Chat } from "@google/genai";
 
 
-// Adam OS, inspired by Gemini 95, was fully vibe-coded by @ammaar and @olacombe, while we don't endorse code quality, we thought it was a fun demonstration of what's possible with the model when a Designer and PM jam.
+// Adam OS, a modern take on classic desktop environments.
 // An homage to an OS that inspired so many of us!
 
 // Define the dosInstances object to fix type errors
@@ -21,6 +21,9 @@ const startButton = document.getElementById('start-button') as HTMLButtonElement
 const taskbarAppsContainer = document.getElementById('taskbar-apps') as HTMLDivElement;
 const paintAssistant = document.getElementById('paint-assistant') as HTMLDivElement;
 const assistantBubble = paintAssistant?.querySelector('.assistant-bubble') as HTMLDivElement;
+const timeElement = document.getElementById('time') as HTMLSpanElement | null;
+const dateElement = document.getElementById('date') as HTMLSpanElement | null;
+const notificationArea = document.getElementById('notification-area') as HTMLDivElement | null;
 
 // --- State Variables ---
 let activeWindow: HTMLDivElement | null = null;
@@ -48,8 +51,21 @@ let ytApiLoaded = false;
 let ytApiLoadingPromise: Promise<void> | null = null;
 
 const DEFAULT_YOUTUBE_VIDEO_ID = 'WXuK6gekU1Y'; // Default video for Adam Player ("Never Gonna Give You Up")
+const DEFAULT_BACKGROUND_URL = "url('https://img.freepik.com/free-vector/gradient-dark-blue-background_23-2149335783.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1721001600&semt=sph')";
 
 // --- Core Functions ---
+
+/** Loads saved background or applies default */
+function loadSavedBackground() {
+  if (desktop) { // desktop is already defined as desktopElement
+    const savedBg = localStorage.getItem('desktopBackground');
+    if (savedBg) {
+      desktop.style.backgroundImage = savedBg;
+    } else {
+      desktop.style.backgroundImage = DEFAULT_BACKGROUND_URL; // Apply default if nothing saved
+    }
+  }
+}
 
 /** Brings a window to the front and sets it as active */
 function bringToFront(windowElement: HTMLDivElement): void {
@@ -117,7 +133,7 @@ async function openApp(appName: string): Promise<void> {
             case 'notepad': iconSrc = 'https://storage.googleapis.com/gemini-95-icons/GemNotes.png'; title = 'Adam Notes'; break;
             case 'paint': iconSrc = 'https://storage.googleapis.com/gemini-95-icons/gempaint.png'; title = 'Adam Paint'; break;
             case 'doom': iconSrc = 'https://64.media.tumblr.com/1d89dfa76381e5c14210a2149c83790d/7a15f84c681c1cf9-c1/s540x810/86985984be99d5591e0cbc0dea6f05ffa3136dac.png'; title = 'Doom II'; break;
-            case 'adamAGI': iconSrc = 'https://storage.googleapis.com/gemini-95-icons/GeminiChatRetro.png'; title = 'Adam AGI App'; break;
+            case 'adamAGI': iconSrc = 'https://storage.googleapis.com/gemini-95-icons/AdamChatRetro.png'; title = 'Adam AGI App'; break;
             case 'minesweeper': iconSrc = 'https://storage.googleapis.com/gemini-95-icons/gemsweeper.png'; title = 'Adam Sweeper'; break;
             case 'imageViewer': iconSrc = 'https://win98icons.alexmeub.com/icons/png/display_properties-4.png'; title = 'Image Viewer'; break;
             case 'mediaPlayer': iconSrc = 'https://storage.googleapis.com/gemini-95-icons/ytmediaplayer.png'; title = 'Adam Player'; break;
@@ -177,6 +193,79 @@ async function openApp(appName: string): Promise<void> {
     else if (appName === 'mediaPlayer') {
         await initMediaPlayer(windowElement);
     }
+    else if (appName === 'personalization') {
+        initPersonalizationApp(windowElement);
+    }
+    else if (appName === 'calculatorApp') {
+      initCalculatorApp(windowElement);
+    }
+    else if (appName === 'calendarApp') {
+      initCalendarApp(windowElement);
+    }
+    else if (appName === 'fileExplorerApp') {
+      initFileExplorerApp(windowElement);
+    }
+    else if (appName === 'settingsApp') {
+      initSettingsApp(windowElement);
+    }
+}
+
+// --- Notification System ---
+function showNotification(message: string, duration: number = 4000) {
+  if (!notificationArea) return;
+
+  const toast = document.createElement('div');
+  toast.classList.add('notification-toast');
+  toast.textContent = message;
+
+  notificationArea.appendChild(toast);
+
+  // Force reflow for animation to trigger correctly
+  void toast.offsetWidth;
+
+  // Set timeout to remove the toast
+  setTimeout(() => {
+    toast.classList.add('fade-out'); // Add fade-out class
+    // Remove element after fade-out animation completes
+    toast.addEventListener('transitionend', () => {
+        if (toast.parentNode) { // Check if still child of notificationArea
+            toast.remove();
+        }
+    });
+    // Fallback removal if transitionend doesn't fire (e.g. if display:none)
+    setTimeout(() => {
+        if (toast.parentNode) toast.remove();
+    }, 500); // Duration of fade-out animation
+  }, duration);
+}
+
+/** Initializes Personalization App functionality */
+function initPersonalizationApp(windowElement: HTMLDivElement) {
+  const bgInput = windowElement.querySelector('#background-input') as HTMLInputElement | null;
+  const resetButton = windowElement.querySelector('#reset-background-button') as HTMLButtonElement | null;
+
+  if (bgInput && desktop) {
+    bgInput.addEventListener('change', (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageUrl = `url('${e.target?.result}')`;
+          desktop.style.backgroundImage = imageUrl;
+          localStorage.setItem('desktopBackground', imageUrl);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  if (resetButton && desktop) {
+    resetButton.addEventListener('click', () => {
+      desktop.style.backgroundImage = DEFAULT_BACKGROUND_URL;
+      localStorage.removeItem('desktopBackground');
+      if (bgInput) bgInput.value = ''; // Clear the file input
+    });
+  }
 }
 
 /** Closes an application window */
@@ -294,6 +383,251 @@ function minimizeApp(appName: string): void {
              bringToFront(openApps.get(nextAppToActivate)!.windowEl);
          }
     }
+}
+
+// --- Settings App Logic ---
+function initSettingsApp(windowElement: HTMLDivElement) {
+  const categories = windowElement.querySelectorAll('.settings-categories li');
+  const contents = windowElement.querySelectorAll('.settings-category-content');
+  const openPersonalizationButton = windowElement.querySelector('#open-personalization-app-button') as HTMLButtonElement;
+  const testNotificationButton = windowElement.querySelector('#test-notification-button') as HTMLButtonElement;
+
+  categories.forEach(category => {
+    category.addEventListener('click', () => {
+      const categoryId = (category as HTMLElement).dataset.category;
+
+      categories.forEach(c => c.classList.remove('active-setting'));
+      category.classList.add('active-setting');
+
+      contents.forEach(content => {
+        (content as HTMLElement).style.display = 'none';
+      });
+
+      const activeContent = windowElement.querySelector(`#settings-${categoryId}`) as HTMLElement;
+      if (activeContent) {
+        activeContent.style.display = 'block';
+      }
+    });
+  });
+
+  if (openPersonalizationButton) {
+    openPersonalizationButton.addEventListener('click', () => {
+      openApp('personalization'); // Use the global openApp function
+    });
+  }
+
+  if (testNotificationButton) {
+    testNotificationButton.addEventListener('click', () => {
+      showNotification("This is a sample notification from Adam OS!");
+    });
+  }
+
+  // Show the first category content by default (System)
+  // Ensure "System" category item is marked active by default, this was handled in HTML by adding class `active-setting`
+  // const defaultContent = windowElement.querySelector('#settings-system') as HTMLElement;
+  // if (defaultContent) defaultContent.style.display = 'block'; // This is already handled by default display in HTML or should be.
+}
+
+
+// --- File Explorer App Logic ---
+function initFileExplorerApp(windowElement: HTMLDivElement) {
+    const secretImageIconInExplorer = windowElement.querySelector('#secret-image-icon-explorer') as HTMLDivElement;
+    if (secretImageIconInExplorer) {
+        secretImageIconInExplorer.addEventListener('click', () => {
+            const imageViewerWindow = document.getElementById('imageViewer') as HTMLDivElement | null;
+            const imageViewerImg = document.getElementById('image-viewer-img') as HTMLImageElement | null;
+            const imageViewerTitle = document.getElementById('image-viewer-title') as HTMLSpanElement | null;
+
+            if (!imageViewerWindow || !imageViewerImg || !imageViewerTitle) {
+                alert("Image Viewer app is missing or corrupted!");
+                return;
+            }
+            imageViewerImg.src = 'https://storage.googleapis.com/gemini-95-icons/%40ammaar%2B%40olacombe.png';
+            imageViewerImg.alt = 'dontshowthistoanyone.jpg';
+            imageViewerTitle.textContent = 'dontshowthistoanyone.jpg - Image Viewer';
+            openApp('imageViewer');
+        });
+    }
+    // Placeholder for other File Explorer specific logic if needed in the future
+}
+
+// --- Calendar App Logic ---
+function initCalendarApp(windowElement: HTMLDivElement) {
+  const monthYearHeader = windowElement.querySelector('#month-year-header') as HTMLHeadingElement;
+  const prevMonthButton = windowElement.querySelector('#prev-month-button') as HTMLButtonElement;
+  const nextMonthButton = windowElement.querySelector('#next-month-button') as HTMLButtonElement;
+  const calendarGrid = windowElement.querySelector('.calendar-grid') as HTMLDivElement;
+
+  let displayedDate = new Date(); // The month and year being displayed
+
+  function renderCalendar(dateToShow: Date) {
+    if (!monthYearHeader || !calendarGrid) return;
+
+    calendarGrid.innerHTML = ''; // Clear previous cells
+    monthYearHeader.textContent = dateToShow.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    const year = dateToShow.getFullYear();
+    const month = dateToShow.getMonth();
+
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    const daysInMonth = lastDayOfMonth.getDate();
+    const startDayOfWeek = firstDayOfMonth.getDay(); // 0 (Sun) - 6 (Sat)
+
+    // Days from previous month
+    const lastDayOfPrevMonth = new Date(year, month, 0).getDate();
+    for (let i = 0; i < startDayOfWeek; i++) {
+      const dayCell = document.createElement('div');
+      dayCell.classList.add('calendar-day-cell', 'other-month');
+      dayCell.textContent = (lastDayOfPrevMonth - startDayOfWeek + 1 + i).toString();
+      calendarGrid.appendChild(dayCell);
+    }
+
+    // Days of current month
+    const today = new Date();
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayCell = document.createElement('div');
+      dayCell.classList.add('calendar-day-cell');
+      dayCell.textContent = day.toString();
+      if (
+        day === today.getDate() &&
+        month === today.getMonth() &&
+        year === today.getFullYear()
+      ) {
+        dayCell.classList.add('current-day');
+      }
+      calendarGrid.appendChild(dayCell);
+    }
+
+    // Days from next month
+    const totalCells = 42; // Assuming 6 weeks display for simplicity
+    const cellsSoFar = startDayOfWeek + daysInMonth;
+    for (let i = 1; i <= totalCells - cellsSoFar; i++) {
+      const dayCell = document.createElement('div');
+      dayCell.classList.add('calendar-day-cell', 'other-month');
+      dayCell.textContent = i.toString();
+      calendarGrid.appendChild(dayCell);
+    }
+  }
+
+  prevMonthButton.addEventListener('click', () => {
+    displayedDate.setMonth(displayedDate.getMonth() - 1);
+    renderCalendar(displayedDate);
+  });
+
+  nextMonthButton.addEventListener('click', () => {
+    displayedDate.setMonth(displayedDate.getMonth() + 1);
+    renderCalendar(displayedDate);
+  });
+
+  renderCalendar(displayedDate); // Initial render
+}
+
+// --- Calculator App Logic ---
+function initCalculatorApp(windowElement: HTMLDivElement) {
+  const displayElement = windowElement.querySelector('.calculator-display span') as HTMLSpanElement;
+  const buttons = windowElement.querySelectorAll('.calculator-buttons button');
+
+  let currentValue: string = '0';
+  let firstOperand: number | null = null;
+  let operator: string | null = null;
+  let waitingForSecondOperand: boolean = false;
+
+  function updateDisplay() {
+    if (!displayElement) return;
+    // Basic overflow prevention for display (conceptual)
+    if (currentValue.length > 15 && currentValue.includes('.') && !currentValue.startsWith('Error')) {
+        // Try to show significant digits or scientific notation if it's too long
+        try {
+            const num = parseFloat(currentValue);
+            if (Math.abs(num) > 1e15 || (Math.abs(num) < 1e-4 && num !== 0) ) {
+                displayElement.textContent = num.toExponential(9);
+                return;
+            }
+        } catch (e) { /* ignore */ }
+    }
+    displayElement.textContent = currentValue.length > 18 ? currentValue.substring(0, 18) + '...' : currentValue;
+
+  }
+  updateDisplay();
+
+  function calculate(val1: number, op: string, val2: number): number {
+    switch (op) {
+      case '+': return val1 + val2;
+      case '-': return val1 - val2;
+      case '*': return val1 * val2;
+      case '/': return val2 === 0 ? NaN : val1 / val2; // Handle division by zero
+      default: return val2;
+    }
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const value = (button as HTMLElement).dataset.value;
+      const action = (button as HTMLElement).dataset.action;
+
+      if (currentValue === 'Error' && action !== 'clear-all') return; // Only allow C after error
+
+      if (value) { // Digit, decimal, or operator
+        if (value >= '0' && value <= '9') {
+          if (waitingForSecondOperand) {
+            currentValue = value;
+            waitingForSecondOperand = false;
+          } else {
+            currentValue = currentValue === '0' ? value : currentValue + value;
+          }
+        } else if (value === '.') {
+          if (!currentValue.includes('.')) {
+            currentValue += '.';
+          }
+        } else if (value === '+/-') {
+            if (currentValue !== '0') {
+                currentValue = currentValue.startsWith('-') ? currentValue.substring(1) : '-' + currentValue;
+            }
+        } else { // Operator (+, -, *, /)
+          if (firstOperand === null) {
+            firstOperand = parseFloat(currentValue);
+          } else if (operator && !waitingForSecondOperand) {
+            const result = calculate(firstOperand, operator, parseFloat(currentValue));
+            if (isNaN(result)) { currentValue = "Error"; firstOperand = null; operator = null; updateDisplay(); return; } // Update display and exit
+            currentValue = String(result);
+            firstOperand = result;
+          } else { 
+             firstOperand = parseFloat(currentValue); 
+          }
+          operator = value;
+          waitingForSecondOperand = true;
+        }
+      } else if (action) { // Action button
+        switch (action) {
+          case 'calculate':
+            if (firstOperand !== null && operator !== null && !waitingForSecondOperand) {
+              const result = calculate(firstOperand, operator, parseFloat(currentValue));
+              if (isNaN(result)) { currentValue = "Error"; }
+              else { currentValue = String(result); }
+              firstOperand = null; 
+              operator = null;
+              waitingForSecondOperand = false; 
+            }
+            break;
+          case 'clear-all':
+            currentValue = '0';
+            firstOperand = null;
+            operator = null;
+            waitingForSecondOperand = false;
+            break;
+          case 'clear-entry':
+            currentValue = '0';
+            if (waitingForSecondOperand) waitingForSecondOperand = false; 
+            break;
+          case 'backspace':
+            currentValue = currentValue.length > 1 ? currentValue.slice(0, -1) : '0';
+            break;
+        }
+      }
+      updateDisplay();
+    });
+  });
 }
 
 // --- Adam AGI Chat Specific Functions ---
