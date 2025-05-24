@@ -1,7 +1,7 @@
 /* Base styles */
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #008080; /* Teal background */
+  font-family: 'Segoe UI Variable', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #eff6fc; /* Windows 11 light blueish background */
   margin: 0;
   padding: 0;
   overflow: hidden; /* Prevent scrollbars */
@@ -17,6 +17,11 @@ body {
   cursor: default; /* Default desktop cursor */
   padding-top: 10px; /* Add some space at the top */
   padding-left: 10px;
+  color: #000000; /* Default text color */
+  background-image: url('https://img.freepik.com/free-vector/gradient-dark-blue-background_23-2149335783.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1721001600&semt=sph');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Icon styles */
@@ -39,9 +44,9 @@ body {
 }
 
 .icon span {
-  color: white;
+  color: #000000; /* Darker text for light background */
   font-size: 0.75rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
+  text-shadow: none; /* Remove text shadow for a flatter look */
   white-space: normal;      /* Allow text wrapping */
   word-wrap: break-word;    /* Break long words */
   max-width: 100%;         /* Allow text to use full icon width */
@@ -50,12 +55,10 @@ body {
 
 /* Window styles */
 .window {
-  background-color: #C0C0C0; /* Window background color - Changed to match Win95 better */
-  border-top: 2px solid #FFFFFF;
-  border-left: 2px solid #FFFFFF;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4); /* More subtle shadow */
+  background-color: #ffffff; /* Cleaner white background */
+  border: 1px solid #cccccc; /* Softer border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Modern shadow */
+  border-radius: 8px; /* Rounded corners */
   position: absolute; /* Absolute positioning within the desktop */
   top: 50px;
   left: 100px;
@@ -75,22 +78,25 @@ body {
 .window.resizable {
   resize: both; /* Enable resizing in both directions */
   overflow: hidden; /* Hide overflow by default, content area will handle scroll */
-  min-width: 200px;  /* Set minimum width */
-  min-height: 150px; /* Set minimum height */
+  min-width: 250px;  /* Increased min-width */
+  min-height: 200px; /* Increased min-height */
 }
 
 .window-titlebar {
-  background-color: #000080; /* Title bar color */
-  color: white;
-  padding: 3px 4px; /* Adjusted padding */
-  font-size: 0.8rem;
-  font-weight: bold; /* Bold title */
+  background-color: #f0f0f0; /* Light gray title bar, slightly darker than window */
+  color: #000000; /* Black text */
+  padding: 8px 12px; /* Increased padding */
+  font-size: 0.85rem; /* Slightly larger font */
+  font-weight: normal; /* Standard weight */
   display: flex;
   justify-content: space-between; /* Space between title and buttons */
   align-items: center; /* Vertically center title and buttons */
   cursor: grab; /* Show a grab cursor */
-  height: 22px; /* Consistent height */
+  height: 36px; /* Increased height */
   box-sizing: border-box;
+  border-top-left-radius: 8px; /* Match window rounding */
+  border-top-right-radius: 8px; /* Match window rounding */
+  border-bottom: 1px solid #e0e0e0; /* Subtle border to separate from content */
 }
 .window-titlebar:active {
   cursor: grabbing; /* Show a grabbing cursor */
@@ -98,45 +104,51 @@ body {
 
 .window-title {
   margin-right: auto; /* Push title to the left */
-  margin-left: 2px;
+  margin-left: 4px; /* Small margin */
   white-space: nowrap;      /* Prevent text wrapping */
   overflow: hidden;        /* Hide overflowing text */
   text-overflow: ellipsis;  /* Add ellipsis (...) if title is too long */
-  max-width: calc(100% - 60px); /* Adjust max-width based on button size */
+  max-width: calc(100% - 80px); /* Adjust max-width based on button size */
 }
 
 .window-controls {
   display: flex;
-  gap: 3px; /* Space between buttons */
+  gap: 4px; /* Space between buttons */
 }
 
 .window-control-button {
-  width: 16px; /* Button size */
-  height: 16px;
-  background-color: #C0C0C0; /* Button background */
-  border-top: 1px solid #FFFFFF;
-  border-left: 1px solid #FFFFFF;
-  border-right: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5); /* Inner highlight */
+  width: 28px; /* Button size */
+  height: 28px;
+  background-color: transparent; /* Flat buttons */
+  border: none;
+  /* box-shadow: none; */ /* Removed Win95 shadow */
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-family: "Times New Roman", serif; /* More classic font for symbols */
-  font-size: 0.8rem; /* Adjust font size as needed */
-  font-weight: bold;
-  line-height: 0;      /* Important for vertical centering of symbols */
+  font-family: 'Segoe UI Symbol', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font for symbols */
+  font-size: 0.9rem; /* Adjust font size as needed */
+  font-weight: normal;
+  line-height: 1;      /* Ensure symbols are centered */
   padding: 0;          /* Reset padding */
-  color: black;
+  color: #000000; /* Black symbols */
+  border-radius: 4px; /* Subtle rounding */
+}
+
+.window-control-button:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle hover */
+}
+.window-control-button.window-close:hover {
+  background-color: #e81123; /* Red hover for close */
+  color: white;
 }
 
 .window-control-button:active {
-  border-top: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #FFFFFF;
-  border-bottom: 1px solid #FFFFFF;
-  box-shadow: none; /* Remove shadow on press */
+  background-color: rgba(0, 0, 0, 0.2); /* Subtle active state */
+}
+.window-control-button.window-close:active {
+  background-color: #c20f1e; /* Darker red for active close */
+  color: white;
 }
 
 .window-minimize { /* Uses text symbol */ }
@@ -144,13 +156,13 @@ body {
 
 
 .window-content {
-  padding: 2px; /* Minimal padding inside window */
+  padding: 8px; /* Increased padding */
   font-size: 0.9rem;
   flex-grow: 1; /* Allow content to fill remaining space */
   overflow: auto; /* Add scrollbars ONLY if content overflows */
-  background-color: white; /* Standard content background */
-  border: 1px inset #808080; /* Inset border for content area */
-  margin: 2px; /* Margin around the content area */
+  background-color: #ffffff; /* Standard content background */
+  /* border: none; */ /* Removed Win95 inset border */
+  margin: 0; /* Remove margin */
   position: relative; /* Needed for absolute positioned elements inside */
   display: flex; /* Make content a flex container for easier layout */
   flex-direction: column; /* Stack children vertically */
@@ -277,20 +289,18 @@ body {
 
 /* Start Menu styles */
 .start-menu {
-  background-color: #C0C0C0;
-  border-top: 2px solid #FFFFFF;
-  border-left: 2px solid #FFFFFF;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+  background-color: #f9f9f9; /* Light theme background */
+  border: 1px solid #e0e0e0; /* Subtle border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Modern shadow */
+  border-radius: 8px; /* Rounded corners */
   position: absolute;
-  bottom: 36px;
-  left: 0;
-  width: 180px;
+  bottom: 52px; /* Adjusted for taller taskbar */
+  left: 4px; /* Align with start button */
+  width: 280px; /* Increased width */
   display: none;
   flex-direction: column;
   z-index: 50;
-  padding: 2px;
+  padding: 8px; /* Uniform padding */
 }
 
 .start-menu.active {
@@ -298,64 +308,65 @@ body {
 }
 
 .start-menu-item {
-  padding: 5px 10px 5px 25px;
-  font-size: 0.8rem;
-  color: black;
+  padding: 8px 12px; /* Adjusted padding */
+  font-size: 0.85rem; /* Slightly larger font */
+  color: #000000; /* Black text */
   cursor: pointer;
   white-space: nowrap;
   position: relative;
+  border-radius: 4px; /* Rounded corners for items */
+  margin-bottom: 2px; /* Space between items */
 }
 
 .start-menu-item:hover {
-  background-color: #000080;
-  color: white;
+  background-color: rgba(0, 0, 0, 0.05); /* Subtle hover */
+  color: #000000; /* Ensure text color remains dark */
 }
 
 /* Taskbar styles */
 #taskbar {
-  background-color: #C0C0C0;
-  border-top: 2px solid #FFFFFF;
+  background-color: #f3f3f3; /* Light background */
+  border-top: 1px solid #e0e0e0; /* Subtle top border for separation */
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 36px;
+  height: 48px; /* Increased height */
   display: flex;
   align-items: center;
-  padding: 3px;
+  padding: 0 8px; /* Adjusted padding */
   z-index: 40;
   box-sizing: border-box;
 }
 
 #start-button {
-  background-color: #C0C0C0;
-  border-top: 2px solid #FFFFFF;
-  border-left: 2px solid #FFFFFF;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  padding: 2px 8px;
-  margin-right: 5px;
+  background-color: transparent; /* Flat button */
+  border: none;
+  padding: 8px 12px;
+  margin-right: 8px;
   cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 0.9rem; /* Adjusted font size */
+  font-weight: normal; /* Standard weight */
   display: flex;
   align-items: center;
-  gap: 4px;
-  height: 30px;
+  justify-content: center; /* Center content */
+  gap: 8px;
+  height: 100%; /* Fill taskbar height */
   box-sizing: border-box;
+  border-radius: 4px; /* Subtle rounded corners */
+}
+
+#start-button:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Subtle hover */
 }
 
 #start-button:active {
- border-top: 2px solid #000000;
- border-left: 2px solid #000000;
- border-right: 2px solid #FFFFFF;
- border-bottom: 2px solid #FFFFFF;
- padding: 3px 7px 1px 9px;
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle active state */
 }
 
 #start-button img {
-  width: 20px;
-  height: 20px;
+  width: 24px; /* Adjusted icon size */
+  height: 24px;
 }
 
 #taskbar-apps {
@@ -367,41 +378,81 @@ body {
 }
 
 .taskbar-app {
-  background-color: #C0C0C0;
-  border-top: 1px solid #FFFFFF;
-  border-left: 1px solid #FFFFFF;
-  border-right: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  padding: 2px 6px;
+  background-color: transparent;
+  border: none; /* Remove Win95 borders */
+  padding: 0 8px; /* Adjust padding */
   margin: 0 2px;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 150px;
-  height: 28px;
+  max-width: 160px; /* Slightly increased max-width */
+  height: calc(100% - 8px); /* Fill height with small margin */
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   box-sizing: border-box;
   flex-shrink: 0;
-  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+  border-radius: 4px; /* Subtle rounded corners */
+  /* box-shadow: none; Removed Win95 inset shadow */
 }
 
 .taskbar-app img {
-  width: 16px;
-  height: 16px;
+  width: 20px; /* Adjusted icon size */
+  height: 20px;
+}
+
+.taskbar-app:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Subtle hover */
 }
 
 .taskbar-app.active, .taskbar-app:active {
-  border-top: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #FFFFFF;
-  border-bottom: 1px solid #FFFFFF;
-  background-color: #e0e0e0;
-  box-shadow: none;
-  padding: 3px 5px 1px 7px;
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle active state */
+  /* Add a bottom border for active state, similar to Win11 */
+  box-shadow: inset 0 -2px 0 #0078d4; /* Blue underline for active */
+  padding-bottom: 2px; /* Adjust padding to keep text centered */
+}
+
+/* Taskbar Date/Time Styles */
+#taskbar-search {
+  padding: 6px 12px; /* Adjusted padding */
+  font-size: 0.9em;
+  border-radius: 20px; /* Pill shape like Win11 search */
+  border: 1px solid #bbb; /* Softer border */
+  background-color: #ffffff;
+  width: 280px; /* Increased width */
+  margin: 0 10px; /* Spacing from start button and app icons */
+  box-sizing: border-box; /* Include padding and border in width/height */
+  height: 32px; /* Align height with taskbar items */
+  line-height: normal; /* Reset line-height */
+}
+
+#taskbar-search::placeholder {
+  color: #666;
+  font-style: italic;
+}
+
+.taskbar-datetime {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align text to the right within the container */
+  justify-content: center; /* Center vertically */
+  padding: 0 10px;
+  margin-left: auto; /* Push to the far right */
+  font-size: 0.75rem;
+  color: #000000; /* Standard text color */
+  height: 100%; /* Fill taskbar height */
+  text-align: right; /* Ensure text inside spans aligns right */
+}
+
+.taskbar-datetime #time {
+  font-weight: normal; /* Standard weight for time */
+}
+
+.taskbar-datetime #date {
+  font-size: 0.7rem; /* Slightly smaller for date */
+  color: #333333; /* Slightly dimmer color for date */
 }
 
 /* Notepad button styling */
@@ -454,6 +505,311 @@ body {
     margin: 0;
     border: none;
 }
+
+/* Basic Calculator Styles */
+.calculator-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.calculator-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent text overflow */
+}
+.calculator-display span {
+    white-space: nowrap; /* Keep display on one line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.calculator-buttons {
+  flex: 3; /* Give more space to buttons */
+}
+.calculator-buttons button {
+  background-color: #e6e6e6; /* Lighter than window bg */
+  border: none;
+  padding: 15px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #000;
+}
+.calculator-buttons button:hover {
+  background-color: #d9d9d9; /* Slightly darker hover */
+}
+.calculator-buttons button:active {
+  background-color: #cccccc; /* Even darker active */
+}
+.calculator-buttons button.operator {
+  background-color: #dadada; /* Different bg for operators */
+}
+.calculator-buttons button.operator:hover {
+  background-color: #cfcfcf;
+}
+.calculator-buttons button.operator:active {
+  background-color: #c2c2c2;
+}
+.calculator-buttons button.equals {
+  background-color: #0078d4; /* Accent color for equals */
+  color: white;
+}
+.calculator-buttons button.equals:hover {
+  background-color: #005a9e;
+}
+.calculator-buttons button.equals:active {
+  background-color: #004c87;
+}
+/* Style for CE, C, Backspace to be slightly different if desired */
+.calculator-buttons button[data-action="clear-entry"],
+.calculator-buttons button[data-action="clear-all"],
+.calculator-buttons button[data-action="backspace"] {
+    background-color: #dadada;
+}
+
+/* Basic Calendar Styles */
+.calendar-content {
+  background-color: #ffffff; /* Ensure white background */
+}
+.calendar-header {
+  /* Styles already in HTML, but can be enhanced */
+}
+#month-year-header {
+    font-weight: 600; /* Semibold for month/year */
+}
+.calendar-nav-button {
+  background-color: transparent;
+  border: 1px solid transparent; /* Make border transparent for alignment, show on hover */
+  padding: 5px 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.calendar-nav-button:hover {
+  background-color: #f0f0f0; /* Light gray hover */
+  border-color: #e0e0e0;
+}
+.calendar-nav-button:active {
+  background-color: #e0e0e0;
+}
+.calendar-days-header {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 2px; /* Space between header and grid lines */
+}
+.calendar-days-header span {
+    font-weight: 500;
+}
+.calendar-grid {
+  /* Styles already in HTML, but can be enhanced */
+}
+.calendar-day-cell {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 10px 5px; /* Adjust padding for cell height */
+  font-size: 0.9em;
+  cursor: default; /* No action on click for now */
+  border-radius: 2px;
+  transition: background-color 0.2s;
+  min-height: 30px; /* Ensure cells have some height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calendar-day-cell.other-month {
+  color: #aaa; /* Dim days from other months */
+  background-color: #f9f9f9;
+}
+.calendar-day-cell.current-day {
+  background-color: #0078d4; /* Accent color for current day */
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+/* Personalization App Styles */
+#personalization .window-content h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+#personalization .window-content p {
+  margin-bottom: 5px;
+}
+#background-input {
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 4px;
+  font-family: inherit;
+}
+#reset-background-button {
+  background-color: #e0e0e0;
+  border: 1px solid #bdbdbd;
+  color: #000000;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+#reset-background-button:hover {
+  background-color: #d5d5d5;
+}
+
+/* Settings App Styles */
+.settings-app-content {
+  /* Uses flex from inline styles */
+}
+.settings-sidebar {
+  /* Basic styles inline, can be enhanced */
+}
+.settings-categories li {
+  padding: 12px 20px;
+  font-size: 0.95em;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background-color 0.2s, border-left-color 0.2s;
+}
+.settings-categories li:hover {
+  background-color: #dcdcdc;
+}
+.settings-categories li.active-setting {
+  background-color: #d0d0d0; /* Slightly darker for active */
+  border-left-color: #0078d4; /* Accent color for active indicator */
+  font-weight: 600;
+}
+.settings-main-content h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+.settings-main-content p {
+  font-size: 0.9em;
+  line-height: 1.6;
+  color: #555;
+}
+#open-personalization-app-button {
+    background-color: #e6e6e6;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#open-personalization-app-button:hover {
+    background-color: #d9d9d9;
+}
+
+/* Notification System Styles */
+#notification-area {
+  position: fixed;
+  bottom: 55px; /* Position above taskbar (48px + 7px margin) */
+  right: 20px;
+  z-index: 1000; /* Ensure it's on top of other UI elements */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px; /* Max width for notifications */
+}
+
+.notification-toast {
+  background-color: rgba(50, 50, 50, 0.9); /* Dark, slightly transparent background */
+  color: white;
+  padding: 12px 18px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-size: 0.9em;
+  opacity: 0; /* Start transparent for fade-in */
+  transform: translateX(100%); /* Start off-screen for slide-in */
+  animation: slideInFadeIn 0.5s forwards;
+  transition: opacity 0.4s, transform 0.4s; /* For fade-out */
+}
+
+@keyframes slideInFadeIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.notification-toast.fade-out {
+    opacity: 0;
+    transform: translateX(50px) scale(0.9); /* Example fade out animation */
+}
+
+/* File Explorer Styles */
+.file-explorer-content {
+  /* Uses flex from inline styles */
+}
+.file-explorer-toolbar {
+  /* Uses flex from inline styles */
+}
+.file-explorer-nav-button {
+  background-color: #e6e6e6;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px 8px;
+  font-size: 1em;
+  cursor: pointer;
+}
+.file-explorer-nav-button:hover {
+  background-color: #d9d9d9;
+}
+.file-explorer-sidebar ul {
+    margin-top: 5px;
+}
+.file-explorer-sidebar li {
+  padding: 4px 8px;
+  margin-bottom: 2px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+.file-explorer-sidebar li:hover {
+  background-color: #e9e9e9;
+}
+.file-explorer-main {
+  display: flex; /* Or grid */
+  flex-wrap: wrap;
+  align-content: flex-start; /* Align items to the top */
+  gap: 10px;
+}
+.fe-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px; /* Adjust as needed */
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.fe-item:hover {
+  background-color: #e9f5ff; /* Light blue hover, typical for selection */
+  border-color: #cce8ff;
+}
+.fe-item img {
+  width: 32px; /* Smaller than desktop icons */
+  height: 32px;
+  margin-bottom: 5px;
+}
+.fe-item span {
+  font-size: 0.75rem;
+  color: #000;
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
 .browser-toolbar {
   background-color: #C0C0C0;
   padding: 5px;
